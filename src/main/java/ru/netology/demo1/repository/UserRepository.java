@@ -11,9 +11,15 @@ import static ru.netology.demo1.model.Authorities.*;
 
 @Repository
 public class UserRepository {
-    List<Authorities> authorities = Arrays.asList();
     List<User> users = new ArrayList<>();
-    public List<User> postUserAuthorities(String user, String password) {
+
+    public void userAuthorities(){
+        User Ivan = new User("Ivan", "1234", Arrays.asList(READ));
+        User Anna = new User("Anna", "1111", Arrays.asList(READ, WRITE));
+        User Nikolay = new User("Nikolay", "4321", Arrays.asList(WRITE, DELETE));
+        users.add(Ivan); users.add(Anna); users.add(Nikolay);
+    }
+    public User postUserAuthorities(String user, String password, List<Authorities> auth) {
         for (User person: users) {
             String name = person.getUser();
             String pass = person.getPassword();
@@ -21,20 +27,21 @@ public class UserRepository {
                 throw new ExistException("Пользователь уже существует");
             }
         }
-        users.add(new User(user, password, Arrays.asList(DELETE, READ, WRITE)));
-        return users;
+        User us = new User(user, password, auth);
+        users.add(us);
+        return us;
     }
 
     public List<Authorities> getUserAuthorities(String user, String password) {
+        userAuthorities();
         for (User person : users) {
             String name = person.getUser();
             String pass = person.getPassword();
-            List<Authorities> auth = person.getAuthorities();
+            List<Authorities> authorities = person.getAuthorities();
             if (user.equals(name) && pass.equals(password)) {
-                authorities = auth;
-                return auth;
+                return authorities;
             }
         }
-        return authorities;
+        return null;
     }
 }

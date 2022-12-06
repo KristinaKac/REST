@@ -16,8 +16,8 @@ public class AuthorizationService {
         this.userRepository = userRepository;
     }
 
-    public List<User> postAuthorities(String user, String password){
-        return userRepository.postUserAuthorities(user, password);
+    public User postAuthorities(String user, String password, List<Authorities> auth){
+        return userRepository.postUserAuthorities(user, password, auth);
     }
 
     public List<Authorities> getAuthorities(String user, String password) {

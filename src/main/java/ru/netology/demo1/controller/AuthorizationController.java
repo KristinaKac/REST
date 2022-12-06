@@ -21,7 +21,8 @@ public class AuthorizationController {
     }
 
     @PostMapping("/authorize")
-    public List<User> postAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {
-        return service.postAuthorities(user, password);
+    public User postAuthorities(@RequestParam("user") String user, @RequestParam("password") String password,
+                                @RequestParam("authorities") List<Authorities> auth) {
+        return service.postAuthorities(user, password, auth);
     }
 }
