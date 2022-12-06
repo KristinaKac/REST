@@ -16,6 +16,7 @@ public class ExceptionHandlerAdvice {
     }
     @ExceptionHandler(UnauthorizedUser.class)
     public ResponseEntity<String> unaUser(UnauthorizedUser i){
+        System.out.println("[ERROR: UnauthorizedUser]: " + i.getMessage());
         return new ResponseEntity<>("Unknown user ", HttpStatus.UNAUTHORIZED);
     }
     @ExceptionHandler(ExistException.class)
